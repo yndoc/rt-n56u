@@ -102,6 +102,14 @@ jobs:
         sudo ./build_firmware_modify $m 0
         sudo mv -f images/*.trx /opt/images/
         done
+    - name: 上传bin文件夹(固件+ipk)在github actions
+      uses: actions/upload-artifact@v2
+      if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
+      with:
+        name: padava_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+
+        path: ${{ env.FIRMWARE }}
+     
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v1-release
       with:
