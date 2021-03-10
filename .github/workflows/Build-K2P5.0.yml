@@ -71,7 +71,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=n" >> .config #SCUTCLIENT
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #SS plus+
         echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config #SS server
-        echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #DNSFORWARDER
+        echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=y" >> .config #DNSFORWARDER
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config #adbyby plus+
         echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config #内网穿透FRPC
         echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config #内网穿透FRPS
@@ -102,15 +102,9 @@ jobs:
         sudo ./build_firmware_modify $m 0
         sudo mv -f images/*.trx /opt/images/
         done
-  #  - name: 上传bin文件夹(固件+ipk)在github actions
     - name : Upload packages
-
       uses: actions/upload-artifact@master
-
       if: always()
-
       with:
-
         name: Padavan-packages
-
         path: /opt/images
